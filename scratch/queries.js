@@ -5,30 +5,28 @@ const { MONGODB_URI } = require('../config');
 
 const Note = require('../models/notes');
 
-/*
+
 mongoose.connect(MONGODB_URI, { useNewUrlParser:true })
   .then(() => {
-    const searchTerm = 'cat';
-    let filter = {};
+    const searchTerm = 'boring';
+    const searchContent = 'cat';
 
-    if (searchTerm) {
-      filter.title = { $regex: searchTerm };
-    }
-
-    return Note.find(filter).sort({ updatedAt: 'desc' });
+    return Note.find({ '$or': [
+      { title: {$regex: searchTerm} }, 
+      { content: {$regex: searchContent}}
+    ]}).sort({ updatedAt: 'desc' });
   })
   .then(results => {
     console.log(results);
   })
   .then(() => {
-    return mongoose.disconnect()
+    return mongoose.disconnect();
   })
   .catch(err => {
     console.error(`ERROR: ${err.message}`);
     console.error(err);
   });
 
-  */
 
 /*
 mongoose.connect(MONGODB_URI, { useNewUrlParser:true })
@@ -86,7 +84,7 @@ mongoose.connect(MONGODB_URI, { useNewUrlParser:true })
     console.error(err);
   });
   */
- /*
+/*
 mongoose.connect(MONGODB_URI, { useNewUrlParser:true })
   .then(() => {
     const id = '000000000000000000000007';
